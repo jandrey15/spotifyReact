@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:10 as base
+FROM mhart/alpine-node:10
 EXPOSE 3000
 
 WORKDIR /app
