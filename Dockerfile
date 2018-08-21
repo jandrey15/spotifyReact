@@ -4,8 +4,7 @@ EXPOSE 5000
 WORKDIR /app
 
 ADD package.json /app/
-RUN npm install
-RUN npm install --save serve
+RUN npm install && npm install --save serve && npm run build
 
 ADD . /app
 
