@@ -3,8 +3,28 @@ sudo: required
 services:
   - docker
 
-before_install:
-  - docker build -t jandrey15/spotify .
+cache:
+  directories:
+    - "node_modules"
 
-script:
-  - sh deployments/qa.sh
+# script: npm test # Here you could also run the build step of your application
+before_deploy: npm install now --no-save # Install Now CLI on Travis
+
+deploy:
+  - provider: script # Run a custom deployment script which we will define below
+    script: now -t $now_token
+    skip_cleanup: true
+    on:
+      all_branches: true
+      master: false
+  - provider: script
+    script: now -t $now_token && now alias -t $now_token
+    skip_cleanup: true
+    on:
+      master: true
+# before_install:
+#   - docker build -t jandrey15/spotify .
+
+# script:
+#   - sh deployments/qa.sh
+

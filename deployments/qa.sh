@@ -6,3 +6,5 @@ echo "deploying..."
 URL=$(now -t $now_token)
 echo "running acceptance on $URL"
 curl --silent -L $URL
+# now alias $URL spotify.johnserrano.xyz
+now alias
