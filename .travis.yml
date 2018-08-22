@@ -14,7 +14,7 @@ cache:
 # before_install:
 #   - docker build -t jandrey15/spotify .
 
-script: npm run now-start && npm test # Here you could also run the build step of your application
+script: npm i server --no-save && npm run now-start && npm test # Here you could also run the build step of your application
 before_deploy: npm install now --no-save # Install Now CLI on Travis
 
 deploy:
