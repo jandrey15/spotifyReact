@@ -1,35 +1,59 @@
-# sudo: required
+# # sudo: required
 
-language: node_js
-node_js:
-  - "node"
+# language: node_js
+# node_js:
+#   - "node"
 
 # services:
 #   - docker
 
-cache:
-  directories:
-    - "node_modules"
+# cache:
+#   directories:
+#     - "node_modules"
 
 # before_install:
 #   - docker build -t jandrey15/spotify .
 
-script: npm i server --no-save && npm run now-start && npm test # Here you could also run the build step of your application
-before_deploy: npm install now --no-save # Install Now CLI on Travis
+# script: npm test # Here you could also run the build step of your application
+# before_deploy: npm install now --no-save # Install Now CLI on Travis
 
+# deploy:
+#   - provider: script # Run a custom deployment script which we will define below
+#     script: now -t $now_token
+#     skip_cleanup: true
+#     on:
+#       all_branches: true
+#       master: false
+#   - provider: script
+#     script: now -t $now_token && now alias -t $now_token
+#     skip_cleanup: true
+#     on:
+#       master: true
+
+# script:
+#   - sh deployments/qa.sh
+
+
+language: node_js
+node_js:
+  - "node"
+cache:
+  directories:
+    - "node_modules" # This will tell Travis CI to cache the dependencies
+script:
+  - npm install
+  - npm test # Here you could also run the build step of your application
+before_deploy: npm install now --no-save # Install Now CLI on Travis
 deploy:
   - provider: script # Run a custom deployment script which we will define below
-    script: now -t $now_token
+    script: now --token $now_token
     skip_cleanup: true
     on:
       all_branches: true
       master: false
   - provider: script
-    script: now -t $now_token && now alias -t $now_token
+    script: now --token $now_token && now alias --token $now_token
     skip_cleanup: true
     on:
       master: true
-
-# script:
-#   - sh deployments/qa.sh
 
