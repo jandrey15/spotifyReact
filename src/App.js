@@ -13,7 +13,7 @@ class App extends Component {
     const params = this.getHashParams();
     console.log(params)
     this.state = {
-      access_token: params.access_token,
+      access_token: params.access_token || null,
       dataTrack: {
         album: null,
         name: null,
@@ -43,6 +43,9 @@ class App extends Component {
     .then((data) => {
       console.log(data)
     })
+    .catch((err) => {
+      console.log(err)
+    })
 
     fetch('https://api.spotify.com/v1/me/playlists', {
       headers: {
@@ -53,6 +56,9 @@ class App extends Component {
     .then((data) => {
       console.log(data)
     })
+    .catch((err) => {
+      console.log(err)
+    })
 
     fetch('https://api.spotify.com/v1/browse/featured-playlists?country=CO', {
       headers: {
@@ -62,6 +68,9 @@ class App extends Component {
     .then((res) => res.json())
     .then((data) => {
       console.log(data)
+    })
+    .catch((err) => {
+      console.log(err)
     })
 
     fetch('https://api.spotify.com/v1/me/tracks', {
@@ -91,6 +100,9 @@ class App extends Component {
       } catch (error) {
         console.warn(error)
       }
+    })
+    .catch((err) => {
+      console.log(err)
     })
   }
 
