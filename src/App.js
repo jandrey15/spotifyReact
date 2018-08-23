@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import Tracks from './components/Tracks'
+import logo from './spotify.png'
+import './App.css'
+// import './components/tracks.css'
 
 class App extends Component {
 
@@ -8,12 +11,7 @@ class App extends Component {
     const params = this.getHashParams();
     // console.log(params)
     this.state = {
-      access_token: params.access_token || null,
-      dataTrack: {
-        album: null,
-        name: null,
-        image: null
-      }
+      access_token: params.access_token || null
     }
   }
 
@@ -77,16 +75,24 @@ class App extends Component {
     } else {
       uri = 'http://localhost:8888/login'
     }
+
     return (
       <div className="App">
         <header className="App-header">
-          <a href={ uri }>
-            <button>Login as spotify</button>
-          </a>
+          <img src={ logo } alt="logo-spotify"/>
         </header>
-        <p className="App-intro">
-        </p>
-        <Tracks />
+        {
+          !this.state.access_token &&
+          <button id="login">
+            <a href={ uri }>
+              Login as spotify
+            </a>
+          </button>
+        }
+        {
+          this.state.access_token &&
+          <Tracks />
+        }
       </div>
     );
   }

@@ -23,11 +23,11 @@ const header = {
 
 const api = {
   tracks: {
-    async getMeTracks(page = 1){
+    async getMeTracks(offset = 0){
       try {
         // console.log(params.access_token)
         if (params.access_token) {
-          const response = await fetch(`${baseUrl}/tracks?offset=0&limit=20`, header);
+          const response = await fetch(`${baseUrl}/tracks?offset=${offset}&limit=20`, header);
           const data = await response.json();
           return data;
         }
