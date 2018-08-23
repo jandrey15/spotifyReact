@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props)
     const params = this.getHashParams();
-    console.log(params)
+    // console.log(params)
     this.state = {
       access_token: params.access_token || null,
       dataTrack: {

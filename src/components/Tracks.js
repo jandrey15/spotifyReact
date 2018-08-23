@@ -13,12 +13,12 @@ class Tracks extends Component {
 
   async componentDidMount() {
     const tracks = await api.tracks.getMeTracks()
-    console.log(tracks)
-    tracks.length > 0 ? (
+    // console.log(tracks)
+    if (tracks.length) {
       this.setState({
         tracks: tracks.items
       })
-    ) : null
+    }
   }
 
   render() {

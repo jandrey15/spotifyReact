@@ -24,9 +24,19 @@ const header = {
 const api = {
   tracks: {
     async getMeTracks(page = 1){
-      const response = await fetch(`${baseUrl}/tracks`, header);
-      const data = await response.json();
-      return data;
+      try {
+        // console.log(params.access_token)
+        if (params.access_token) {
+          const response = await fetch(`${baseUrl}/tracks`, header);
+          const data = await response.json();
+          return data;
+        }
+
+        return []
+      } catch(err) {
+        console.log(err)
+        return []
+      }
     },
     // async getSingle(id = 1){
     //   const response = await fetch(`${baseUrl}/posts/${id}`);
