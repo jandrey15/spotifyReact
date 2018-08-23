@@ -27,12 +27,14 @@ const api = {
       try {
         // console.log(params.access_token)
         if (params.access_token) {
-          const response = await fetch(`${baseUrl}/tracks`, header);
+          const response = await fetch(`${baseUrl}/tracks?offset=0&limit=20`, header);
           const data = await response.json();
           return data;
         }
 
-        return []
+        return {
+          items: []
+        }
       } catch(err) {
         console.log(err)
         return []
